@@ -1,0 +1,174 @@
+
+#НЕ ЗАКОНЧЕНО
+
+
+'''Создать класс MyTime. Атрибуты: hours, minutes, seconds. Методы:
+переопределить магические методы сравнения(==, !=, >=, <=, <, >),
+сложения, вычитания, умножения на число, вывод на экран. Перегрузить
+конструктор на обработку входных параметров вида: одна строка, три
+числа, другой объект класса MyTime, и отсутствие входных параметров.
+Реализовать нормальное отображение времени(12:65:83 - 13:06:23)
+[my-oop-02] 
+
+
+
+class MyTime:
+    def __init__(self, hours, minutes, seconds) -> None:
+        self.hours=hours
+        self.minutes=minutes
+        self.seconds=seconds
+#-----------------------------------------------------
+    def __eq__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            return(self.hours==other.hours and self.minutes==other.minutes and self.seconds==other.seconds)
+        if isinstance(self,MyTime): # случай когда число сравнивают с объектом,перебор атрибутов объекта
+            if self.minutes==other and self.minutes==other and self.seconds==other:
+                return("All is eq")
+            if self.hours==other and  self.minutes==other:
+                return("Hours and minutes eq")
+           
+            if  self.hours==other and self.seconds==other:
+                return("Hours and seconds are eq")
+            if  self.minutes==other and self.seconds==other:
+                return("minutes and seconds are eq")
+            #
+            if self.hours==other:
+                return("Hours eq")
+            if self.minutes==other:
+                return("minutes eq")
+            if self.seconds==other:
+                return("seconds eq")
+            #
+            else:
+                return("Nothing is eq")
+#--------------------------------------------------
+    def __ne__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            return(self.hours!=other.hours and self.minutes!=other.minutes and self.seconds!=other.seconds)
+        if isinstance(self,MyTime): # случай когда число сравнивают с объектом,перебор атрибутов объекта
+            if self.minutes!=other and self.minutes!=other and self.seconds!=other:
+                return("Nothing is eq")
+            if self.hours!=other and  self.minutes!=other:
+                return("Hours and minutes are !not! eq")
+           
+            if  self.hours!=other and self.seconds!=other:
+                return("Hours and seconds are !not! eq")
+            if  self.minutes!=other and self.seconds!=other:
+                return("minutes and seconds are !not! eq")
+            #
+            if self.hours!=other:
+                return("Hours are !not!  eq")
+            if self.minutes!=other:
+                return("minutes are !not! eq")
+            if self.seconds!=other:
+                return("seconds are !not! eq")
+            #
+            else:
+                return("All is eq")
+#----------------------------------------------------------------------
+    def __lt__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            if self.hours==other.hours:
+                if self.minutes<other.minutes:
+                    return(True)
+                if self.minutes>other.minutes:
+                    return(False)
+                if self.minutes==other.minutes:
+                    if self.seconds<other.seconds:
+                        return(True)
+                if self.seconds>other.seconds:
+                    return(False)
+            if self.hours<other.hours:
+                return(True)
+            if self.hours>other.hours:
+                return(False)
+            else:
+                return("They are eq")
+        if isinstance(other,(int,float)):#Два атрибута
+            if (self<other):
+                return(True)
+            else:
+                return(False)
+#--------------------------------------------------------------
+    def __gt__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            if self.hours==other.hours:
+                if self.minutes>other.minutes:
+                    return(True)
+                if self.minutes<other.minutes:
+                    return(False)
+                if self.minutes==other.minutes:
+                    if self.seconds>other.seconds:
+                        return(True)
+                if self.seconds<other.seconds:
+                    return(False)
+            if self.hours>other.hours:
+                return(True)
+            if self.hours<other.hours:
+                return(False)
+            else:
+                return("They are eq")
+        if isinstance(other,(int,float)):#Два атрибута
+            if (self>other):
+                return(True)
+            else:
+                return(False)
+#---------------------------------------------------------------------
+    def __le__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            if self.hours==other.hours and self.minutes==other.minutes and self.seconds==other.seconds:
+                return (True)     
+            if self.hours==other.hours:
+                if self.minutes>other.minutes:
+                    return(False)
+
+                if self.minutes==other.minutes  :
+                    if self.seconds==other.seconds or self.seconds<other.seconds:
+                        return(True)
+                    else:
+                        return(False)
+
+                if self.minutes<other.minutes:
+                     return(True)
+            if self.hours<other.hours:
+                return(True)
+            if self.hours>other.hours:
+                return(False)
+        if isinstance(other,(int,float)):#Два атрибута
+            if (self<other or self==other):
+                return(True)
+            else:
+                return(False)
+#---------------------------------------------------------------------
+    def __ge__(self,other):
+        if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
+            if self.hours==other.hours and self.minutes==other.minutes and self.seconds==other.seconds:
+                return (True)     
+            if self.hours==other.hours:
+                if self.minutes<other.minutes:
+                    return(False)
+
+                if self.minutes==other.minutes  :
+                    if self.seconds==other.seconds or self.seconds>other.seconds:
+                        return(True)
+                    else:
+                        return(False)
+
+                if self.minutes>other.minutes:
+                     return(True)
+            if self.hours>other.hours:
+                return(True)
+            if self.hours<other.hours:
+                return(False)
+
+        if isinstance(other,(int,float)):#Два атрибута
+            if (self>other or self==other):
+                return(True)
+            else:
+                return(False)
+
+t1=MyTime(9,9,12)
+t2=MyTime(9,9,9)
+print(t1.hours<t2.hours)
+
+'''

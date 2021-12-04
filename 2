@@ -1,0 +1,102 @@
+''' Создать три дочерних класса Circle(атрибуты: координаты
+центра(тип Point), длина радиуса; методы: нахождение периметра и
+площади окружности),Square(атрибуты: две точки, методы: нахождение
+площади и периметра). При потребности создавать все необходимые
+методы не описанные в задании.'''
+
+'''  Создать список фигур и в цикле
+подсчитать и вывести площади всех фигур на экран
+Примечание: в рамках задание создать два файла: classes.py и main.py. В
+первом будут описаны все классы, во втором классы будут
+импортированы и использованы'''
+
+from math import sqrt
+class Point:
+    def __init__(self,x,y) :
+        self.x=x
+        self.y=y
+#------------------------------------------------
+
+class Circle(Point):
+    def __init__(self, x, y,radius,pi=3.14):
+        super().__init__(x, y)
+        self.radius=radius
+        self.pi=pi
+    @property
+    def perimetr(self):
+        per=((2*self.radius*self.pi))
+        return (f"Периметр  круга равен {per}")
+    @property
+    def ploshad(self):
+        pl=(self.pi*(self.radius**2))
+        return(f"Площадь  круга равна {pl}")
+#----------------------------------------------
+
+class Triangle(Point):
+    def __init__(self, x, y,x2,y2,x3,y3):
+        super().__init__(x, y)
+        self.x2=x2
+        self.y2=y2
+        self.x3=x3
+        self.y3=y3
+        s=abs((self.x-self.x3)*(self.y2-self.y3)-(self.x2-self.x3)*(self.y-self.y3))
+        self.s=s
+        if self.s==0:
+            return(("Такого треугольника не существует,введите другие точки"))
+#-------------------------------------------------------------------
+    @property
+    def ploshad(self):
+        
+        if self.s==0:
+            return(("Такого треугольника не существует,введите другие точки"))
+        if self.s!=0:
+            pl=(self.s/2)
+            
+            return((f"Площадь треугольника равна {pl}"))
+    @property
+    def perimetr(self):
+        if self.s==0:
+            return(("Такого треугольника не существует,введите другие точки"))
+        if self.s!=0:
+            xx2=sqrt((self.x2-self.x)**2+(self.y2-self.y)**2)
+            self.xx2=xx2
+            x2x3=sqrt(((self.x3-self.x2)**2)+((self.y3-self.y2)**2))
+            self.x2x3=x2x3
+            xx3=sqrt(((self.x3-self.x)**2)+((self.y3-self.y)**2))
+            self.xx3=xx3
+            per=self.x2x3+self.xx2+self.xx3
+            
+            return ((f"Периметр   треугольника равен {per}"))
+#-------------------------------------------------------------------------------
+class Square(Point):
+    def __init__(self, x, y,x2,y2):
+        super().__init__(x, y)
+        self.x2=x2
+        self.y2=y2
+        a=sqrt((self.x2-self.x)**2+(self.y2-self.y)**2)
+        self.a=a
+    @property
+    def perimetr(self):
+        per=self.a*4
+        return ((f"Периметр  квадрата равен {per}"))
+    @property
+    def ploshad(self):
+        pl=self.a**2
+        return ((f"Периметр  квадрата равен {pl}"))
+
+#---------------------------------------------------------------
+filename="""classes.py"""
+clases=[Point,Triangle,Square,Circle]
+li=[f" класс: {x} и его атрибуты: {dir (x)}" for x in clases]
+file=open(filename,mode="w+",encoding="UTF-8")
+for i in li:
+    file.writelines([f" {i} /n"])
+file.close
+#-----------------------------------------------------
+filename="""main.py"""
+spisok_figur=[Circle(5,5,5),Triangle(1,1,4,4,10,1),Square(1,5,5,5),Circle(6,6,6),Triangle(2,2,6,6,14,1),Square(7,7,13,7)]
+per=[]
+for i in spisok_figur:
+    per.append(f"{i}  {i.perimetr} {i.ploshad} /n ")
+file=open(filename,mode="w+",encoding="UTF-8")
+file.writelines(per)
