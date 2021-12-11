@@ -1,26 +1,32 @@
-#НЕ ЗАКОНЧЕНО
-
-
-
 '''Создать класс MyTime. Атрибуты: hours, minutes, seconds. Методы:
 переопределить магические методы сравнения(==, !=, >=, <=, <, >),
 
 сложения, вычитания, умножения на число, вывод на экран.
 
 
- Перегрузить
+Перегрузить
 конструктор на обработку входных параметров вида: одна строка, три
 числа, другой объект класса MyTime, и отсутствие входных параметров.
+
 Реализовать нормальное отображение времени(12:65:83 - 13:06:23)
-[my-oop-02] '''
-
-
+ 
+'''
 
 class MyTime:
-    def __init__(self, hours, minutes, seconds) -> None:
-        self.hours=hours
-        self.minutes=minutes
-        self.seconds=seconds
+    def __init__(self, hours=None, minutes=None, seconds=None,other=None) -> None:
+        if hours!=None and minutes!=None and seconds!=None:
+            self.hours=hours
+            self.minutes=minutes
+            self.seconds=seconds
+        if other!=None and isinstance(other,MyTime):
+            self.hours=other.hours
+            self.minutes=other.minutes
+            self.seconds=other.seconds
+        if other!=None and isinstance(other,str):
+            spl_other=other.split(":")
+            self.hours=int(spl_other[0])
+            self.minutes=int(spl_other[1])
+            self.seconds=int(spl_other[2])
 #-----------------------------------------------------
     def __eq__(self,other):
         if isinstance(other,MyTime):#сравнение 2ух объектов или двух атрибутов объектов
@@ -316,3 +322,33 @@ class MyTime:
 #--------------------------------------------------------------------------------
     def __str__(self):
         return(f" hours:{self.hours} minutes:{self.minutes} seconds:{self.seconds}")
+    #Реализовать нормальное отображение времени(12:65:83 - 13:06:23)
+    @property
+    def norm_time(self):
+        if self.seconds>=60:
+            self.seconds=self.seconds-60
+            self.minutes=self.minutes+1
+        if self.minutes>=60:
+            self.minutes=self.minutes-60
+            self.hours=self.hours+1
+        if self.hours>24:
+            self.hours=self.hours-24
+
+ob1=MyTime(other="18:3:65")#строка для конструктора
+ob1.norm_time#преобразование в корректное
+print(ob1)#__str__
+ob2=MyTime(other=ob1)#другой объект
+ob2.norm_time
+print(ob2)
+ob3=MyTime(6,19,7)#обыч параметры
+print(ob1==ob2,ob2>=ob1,ob2!=ob1)
+print(ob3>ob2)
+print(ob3<ob2)
+
+print(ob3-1)
+print(1-ob3)
+
+print(ob3/ob1.minutes)#это на 4
+print(10//ob2)
+
+print(ob2*ob2)# учесть что время после преобраз в корректное теперь 18 4 5
