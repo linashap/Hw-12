@@ -1,14 +1,18 @@
-
 #НЕ ЗАКОНЧЕНО
+
 
 
 '''Создать класс MyTime. Атрибуты: hours, minutes, seconds. Методы:
 переопределить магические методы сравнения(==, !=, >=, <=, <, >),
-сложения, вычитания, умножения на число, вывод на экран. Перегрузить
+
+сложения, вычитания, умножения на число, вывод на экран.
+
+
+ Перегрузить
 конструктор на обработку входных параметров вида: одна строка, три
 числа, другой объект класса MyTime, и отсутствие входных параметров.
 Реализовать нормальное отображение времени(12:65:83 - 13:06:23)
-[my-oop-02] 
+[my-oop-02] '''
 
 
 
@@ -166,9 +170,149 @@ class MyTime:
                 return(True)
             else:
                 return(False)
+#---------------------------------------------------------------------------------------------------------------------------------------------------------
+    def __add__(self,other):
+        if isinstance(other,MyTime):#СЛОЖЕНИЕ 2ух объектов
+            return(self.hours+other.hours,self.minutes+other.minutes,self.seconds+other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите к чему вы хотите прибавить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты /n" " "  "введите 3 -секунды /n ")
+            
+            
+            
+            if choise=="1":
+                return(self.hours+other)
+            if choise=="2":
+                return(self.minutes+other)
+            if choise=="3":
+                return(self.seconds+other)
+            if choise=="4":
+                return(self.hours+other,self.minutes+other,self.seconds+other)
+    def __radd__(self,other):
+        if isinstance(other,MyTime):#СЛОЖЕНИЕ 2ух объектов
+            return(self.hours+other.hours,self.minutes+other.minutes,self.seconds+other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите что вы хотите прибавить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты /n" " "  "введите 3 -секунды /n " ' ' 'введите 4 -все')
+            
+            if choise=="1":
+                return(self.hours+other)
+            if choise=="2":
+                return(self.minutes+other)
+            if choise=="3":
+                return(self.seconds+other)
+            if choise=="4":
+                return(other+self.hours,other+self.minutes,other + self.seconds)
+#------------------------------------------------------------------------------------------------------------------------------------------------
+    def __sub__(self,other):
+        if isinstance(other,MyTime):# 2ух объектов
+            return(self.hours-other.hours,self.minutes-other.minutes,self.seconds-other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите от чего вы хотите вычитать {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты /n" " "  "введите 3 -секунды /n " ' ' 'введите 4 -все')
+            
+            if choise=="1":
+                return(self.hours-other)
+            if choise=="2":
+                return(self.minutes-other)
+            if choise=="3":
+                return(self.seconds-other)
+            if choise=="4":
+                return(self.hours-other,self.minutes-other,self.hours-other)
 
-t1=MyTime(9,9,12)
-t2=MyTime(9,9,9)
-print(t1.hours<t2.hours)
+    def __rsub__(self,other):
+        if isinstance(other,MyTime):# 2ух объектов
+            return(self.hours-other.hours,self.minutes-other.minutes,self.seconds-other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите что вы хотите вычитать {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            
+            if choise=="1":
+                return(other-self.hours)
+            if choise=="2":
+                return(other-self.minutes)
+            if choise=="3":
+                return(other-self.seconds)
+            if choise=="4":
+                return(other-self.hours,other-self.minutes,other-self.seconds)
+#---------------------------------------------------------------------------
+    def __truediv__(self, other):
+        if isinstance(other,MyTime):
+            return(self.hours/other.hours,self.minutes/other.minutes,self.seconds/other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите что вы хотите делить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(self.hours/other)
+            if choise=="2":
+                return(self.minutes/other)
+            if choise=="3":
+                return(self.seconds/other)
+            if choise=="4":
+                return(self.hours/other,self.minutes/other,self.seconds/other)
+    def __rtruediv__(self, other):
+        if isinstance(other,MyTime):
+            return(self.hours/other.hours,self.minutes/other.minutes,self.seconds/other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите на что вы хотите делить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(other/self.hours)
+            if choise=="2":
+                return(other/self.minutes)
+            if choise=="3":
+                return(other/self.seconds)
+            if choise=="4":
+                return(other/self.hours,other/self.minutes,other/self.seconds)
+#---------------------------------------------------------------------------
+    def __floordiv__(self, other):
+        if isinstance(other,MyTime):
+            return(self.hours//other.hours,self.minutes//other.minutes,self.seconds//other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите что вы хотите делить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(self.hours//other)
+            if choise=="2":
+                return(self.minutes//other)
+            if choise=="3":
+                return(self.seconds//other)
+            if choise=="4":
+                return(self.hours/other,self.minutes//other,self.seconds//other)
+    def __rfloordiv__(self, other):
+        if isinstance(other,MyTime):
+            return(self.hours//other.hours,self.minutes//other.minutes,self.seconds//other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите на что вы хотите делить {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(other//self.hours)
+            if choise=="2":
+                return(other//self.minutes)
+            if choise=="3":
+                return(other//self.seconds)
+            if choise=="4":
+                return(other//self.hours,other//self.minutes,other//self.seconds)
+#--------------------------------------------------------------------------------------------------------------------------------------
+    def __mul__(self,other):
+        if isinstance(other,MyTime):
+            return(self.hours*other.hours,self.minutes*other.minutes,self.seconds*other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите что вы хотите умножать {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(self.hours*other)
+            if choise=="2":
+                return(self.minutes*other)
+            if choise=="3":
+                return(self.seconds*other)
+            if choise=="4":
+                return(self.hours*other,self.minutes*other,self.seconds*other)  
 
-'''
+    def __rmul__(self,other):
+        if isinstance(other,MyTime):
+            return(self.hours*other.hours,self.minutes*other.minutes,self.seconds*other.seconds)
+        if isinstance(other,(int,float)):
+            choise= input(f"Ввдите на  что вы хотите умножать {other}:" ' ' " введите 1 -часы " " "  "введите 2 -минуты " " "  "введите 3 -секунды  " ' ' 'введите 4 -все')
+            if choise=="1":
+                return(other*self.hours)
+            if choise=="2":
+                return(other*self.minutes)
+            if choise=="3":
+                return(other*self.seconds)
+            if choise=="4":
+                return(other*self.hours,other*self.minutes,other*self.seconds)  
+#--------------------------------------------------------------------------------
+    def __str__(self):
+        return(f" hours:{self.hours} minutes:{self.minutes} seconds:{self.seconds}")
